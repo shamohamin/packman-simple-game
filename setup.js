@@ -37,4 +37,5 @@ export function game(staff){
         staff.push(new Circle(x , y , 'yellow')) ;
         x += 8;
     }
+    
 }
