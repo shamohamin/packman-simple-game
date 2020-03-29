@@ -77,3 +77,4 @@ export function checkWalls(x , y, move, staff){
     }
     return true ;
 }
+
