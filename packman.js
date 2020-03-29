@@ -25,8 +25,8 @@ window.onload = function () {
         }
     }
 
-    // packman.draw(ctx, constants.RIGHT);
-    ghost1.draw(ctx);
+    packman.draw(ctx, constants.RIGHT);
+    // ghost1.draw(ctx);
 
     this.document.addEventListener('keyup', (event) => {
         if(event.preventDefault) event.preventDefault();

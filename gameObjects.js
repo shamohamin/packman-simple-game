@@ -39,7 +39,7 @@ export function Packman(x, y){
     }
 
     this.draw = function (ctx, move){
-        // ctx.clearRect(0,0,400,400);
+        ctx.clearRect(0,0,400,400);
         ctx.beginPath()
         ctx.save();
         ctx.translate(this.x,this.y);
@@ -50,12 +50,12 @@ export function Packman(x, y){
         }else if(move === constants.LEFT){
             ctx.rotate(Math.PI);
         }
-        ctx.strokeStyle = "red";
+        ctx.fillStyle = "yellow";
         const dis = (Math.sqrt(2) / 2) 
         ctx.arc(0,0, 12, Math.PI / 4 , (Math.PI / 4) * 7 ,false) ;
         ctx.lineTo(0 - dis, 0 + dis);
         ctx.lineTo(14 * dis , 14 * dis);
-        ctx.stroke();
+        ctx.fill();
         ctx.closePath() ;
         ctx.restore() ;
     }
@@ -78,7 +78,7 @@ export function Ghost(x,y){
         ctx.beginPath();
         ctx.translate(this.x, this.y);
 
-        ctx.strokeStyle = "blue";
+        ctx.strokeStyle = "red";
         ctx.arc(0 , 0, 14, 0 , Math.PI,true );
         ctx.lineTo(-14 , +14);
         ctx.lineTo(-7, 7);

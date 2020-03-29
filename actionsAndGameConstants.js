@@ -6,3 +6,5 @@ export const WIDTH = 400 ;
 export const HEIGHT = 400 ;
 export const PACKMANRADUIS = 12 ;
 export const RECTWIDTH = 40;
+export const PACKMANCOLOR = "yellow";
+export const GHOSTCOLOR = "red";
