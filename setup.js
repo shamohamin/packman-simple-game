@@ -1,7 +1,7 @@
 import { WIDTH, HEIGHT } from './actionsAndGameConstants.js';
-import {Circle, Rect} from './objects.js';
+import {Circle, Rect} from './gameObjects.js';
 
-export function game(staff){
+export function setupGame(staff){
 
     let x = 30 , y = 30;
     for(let j = 0 ; y < WIDTH; j++){
@@ -37,5 +37,5 @@ export function game(staff){
         staff.push(new Circle(x , y , 'yellow')) ;
         x += 8;
     }
-    
+
 }

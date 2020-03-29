@@ -1,4 +1,4 @@
-import { Circle, Rect } from "./objects.js";
+import { Circle, Rect } from "./gameObjects.js";
 import { WIDTH,HEIGHT,DOWN,UP,LEFT,RIGHT ,PACKMANRADUIS,RECTWIDTH} 
                 from './actionsAndGameConstants.js'
 
@@ -38,7 +38,7 @@ export function eatingNodes(x_packman, y_packamn, staff){
         if(rect instanceof Circle){
             if((rect.x < x_packman + 14) && (rect.x > x_packman - 14)
                 && (rect.y < y_packamn + 14) && (rect.y > y_packamn - 14)){
-                delete staff[i] ;
+                delete staff[i];
             }
         }
     }

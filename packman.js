@@ -1,28 +1,12 @@
 import {checkWalls ,eatingNodes} 
         from '../packman-simple-game/gameLogic.js';
-import {Rect} from '../packman-simple-game/objects.js';
+import {Rect, Packman, Ghost} from './gameObjects.js';
 import * as constants from '../packman-simple-game/actionsAndGameConstants.js';
-import { game } from './setup.js'
+import { setupGame } from './setup.js';
 
 export var staff = new Array();
-export var x_packman = 15 , y_packamn = 15 ;
-
-
-function drawPackman(ctx,x, y){
-    ctx.clearRect(0,0,400,400);
-    ctx.beginPath()
-    ctx.save();
-    ctx.translate(x,y);
-    ctx.fillStyle = "blue";
-    const dis = (Math.sqrt(2) / 2) 
-    ctx.arc(0,0, 12, Math.PI / 4 , (Math.PI / 4) * 7 ,false) ;
-    ctx.lineTo(0 - dis, 0 + dis);
-    ctx.lineTo(14 * dis , 14 * dis);
-    ctx.stroke();
-    ctx.closePath();
-    ctx.restore();
-}
-
+const packman = new Packman(15,15);
+const ghost1 = new Ghost(15,15);
 
 window.onload = function () {
     const ctx = document.getElementById('canvas').getContext('2d')
@@ -30,44 +14,49 @@ window.onload = function () {
     ctx.strokeStyle = "red"
     new Rect(0 ,0 , WIDTH, HEIGHT).draw(ctx)
     
-    game(staff);
+    setupGame(staff);
 
     draw();
 
-    function draw(){    
+    function draw(){ 
         for(let rect of staff){
             if(typeof(rect) !== "undefined")
                 rect.draw(ctx);
         }
     }
 
-    drawPackman(ctx,x_packman,y_packamn);
+    // packman.draw(ctx, constants.RIGHT);
+    ghost1.draw(ctx);
 
     this.document.addEventListener('keyup', (event) => {
         if(event.preventDefault) event.preventDefault();
         const {RIGHT, DOWN, UP, LEFT} = constants;
         if (event.keyCode === 38){
             this.console.log("inside up");
-            if(checkWalls(x_packman, y_packamn - 10 , UP, staff)){
+            if(checkWalls(packman.x, packman.y - 10 , UP, staff)){
                 this.console.log("inside up");
-                drawPackman(ctx,x_packman, y_packamn -= 10);
+                packman.setAtr(packman.x, packman.y - 10);
+                packman.draw(ctx, UP);
             }
         }else if(event.keyCode === 40){
-            if(checkWalls(x_packman, y_packamn + 10 , DOWN, staff)){
-                drawPackman(ctx,x_packman, y_packamn += 10);
+            if(checkWalls(packman.x, packman.y + 10 , DOWN, staff)){
+                packman.setAtr(packman.x, packman.y + 10);
+                packman.draw(ctx, DOWN);
             }
         }else if(event.keyCode === 39){
-            if(checkWalls(x_packman + 10, y_packamn , RIGHT, staff)){
-                drawPackman(ctx,x_packman += 10 , y_packamn);
+            if(checkWalls(packman.x + 10, packman.y , RIGHT, staff)){
+                packman.setAtr(packman.x += 10, packman.y );
+                packman.draw(ctx, RIGHT);
             }
         }else if(event.keyCode === 37){
-            if(checkWalls(x_packman - 10, y_packamn , LEFT, staff)){
-                drawPackman(ctx,x_packman -= 10, y_packamn);
+            if(checkWalls(packman.x - 10, packman.y , LEFT, staff)){
+                packman.setAtr(packman.x - 10, packman.y);
+                packman.draw(ctx, LEFT);
             }
         }
-        eatingNodes(x_packman, y_packamn, staff);
-        draw();
-    });
+        eatingNodes(packman.x, packman.y, staff) ;
+        draw() ;
+    }) ;
 
 }
 
