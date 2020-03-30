@@ -40,8 +40,6 @@ export function Packman(x, y){
     }
 
     this.draw = function (ctx, move){
-        
-        console.log(move)
         ctx.beginPath()
         ctx.save();
         ctx.translate(this.x,this.y);
@@ -109,43 +107,58 @@ export function Ghost(x,y){
         ctx.restore();
     }
 
-    this.move = function(staff){
-        let posibles = [];
+    this.move = function(staff , packman){
+        let possibles = [];
         for(let option of this.movePossibilities){
             if(checkWalls(x, y, option, staff)){
-                posibles.push(option);
+                possibles.push(option);
             }
         }
-        
+        this.makeDecision(possibles, packman) ;
     }
 
-    this.makeMov = function(moves){
-        for(let move in moves){
-            // switch(option){
-            //     case constants.RIGHT :
-            //         if(checkWalls(x + 10 , y, option , staff)){
-            //             posibles.push(constants.RIGHT);
-            //         }
-            //         break;
-            //     case constants.LEFT :
-            //         if(checkWalls(x - 10 , y , option, staff)){
-            //             posibles.push(constants.LEFT);
-            //         }
-            //         break;
-            //     case constants.DOWN:
-            //         if(checkWalls(x, y+10 , option , staff)){
-            //             posibles.push(constants.DOWN);
-            //         }
-            //         break;
-            //     case constants.UP:
-            //         if(checkWalls(x, y-10, option , staff)){
-            //             posibles.push(constants.UP);
-            //         }
-            //         break;
-            //     default:
-            //         break;
-            // }
+    this.makeDecision = function(moves, packman){
+        let direction = [];
+        let min = 20000000 ;
+        for(let option in moves){
+            let dis ;
+            switch(option){
+                case constants.RIGHT :
+                    dis = this.dist(this.x + 10, this.y ,packman)
+                    if(min > dis){
+                        min = dis ;
+                        direction.push(constants.RIGHT);
+                    }
+                    break;
+                case constants.LEFT :
+                    dis = this.dist(this.x - 10, this.y ,packman)
+                    if(min > dis){
+                        min = dis ;
+                        direction.push(constants.LEFT);
+                    }
+                    break;
+                case constants.DOWN:
+                    dis = this.dist(this.x, this.y + 10 ,packman)
+                    if(min > dis){
+                        min = dis ;
+                        direction.push(constants.DOWN);
+                    }
+                    break;
+                case constants.UP:
+                    dis = this.dist(this.x, this.y - 10 ,packman)
+                    if(min > dis){
+                        min = dis ;
+                        direction.push(constants.UP);
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
     }
+
+    this.dist = (moved_x , moved_y , packman) => 
+        (moved_x - packman.x) * (moved_x - packman.x) + 
+            (moved_y - packman.x) * (moved_y - packman.x) ;
 
 }
