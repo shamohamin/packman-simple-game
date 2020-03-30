@@ -1,4 +1,5 @@
 import * as constants from './actionsAndGameConstants.js';
+import { checkWalls } from "./gameLogic.js";
 
 export function Rect(x, y, w, h, c){
     this.x = x;
@@ -39,10 +40,12 @@ export function Packman(x, y){
     }
 
     this.draw = function (ctx, move){
-        ctx.clearRect(0,0,400,400);
+        
+        console.log(move)
         ctx.beginPath()
         ctx.save();
         ctx.translate(this.x,this.y);
+        ctx.clearRect(-14,-14,28,28);
         if(move === constants.DOWN){
             ctx.rotate(Math.PI * 0.5);
         }else if(move === constants.UP){
@@ -50,7 +53,7 @@ export function Packman(x, y){
         }else if(move === constants.LEFT){
             ctx.rotate(Math.PI);
         }
-        ctx.fillStyle = "yellow";
+        ctx.fillStyle = constants.PACKMANCOLOR ;
         const dis = (Math.sqrt(2) / 2) 
         ctx.arc(0,0, 12, Math.PI / 4 , (Math.PI / 4) * 7 ,false) ;
         ctx.lineTo(0 - dis, 0 + dis);
@@ -65,7 +68,8 @@ export function Packman(x, y){
 export function Ghost(x,y){
     this.x = x;
     this.y = y;
-
+    this.movePossibilities = 
+            [constants.RIGHT , constants.LEFT, constants.UP, constants.DOWN];
     this.setAtr = function (x,y){
         this.x = x;
         this.y = y;
@@ -78,7 +82,7 @@ export function Ghost(x,y){
         ctx.beginPath();
         ctx.translate(this.x, this.y);
 
-        ctx.strokeStyle = "red";
+        ctx.strokeStyle = constants.GHOSTCOLOR;
         ctx.arc(0 , 0, 14, 0 , Math.PI,true );
         ctx.lineTo(-14 , +14);
         ctx.lineTo(-7, 7);
@@ -103,6 +107,45 @@ export function Ghost(x,y){
         
         ctx.closePath();
         ctx.restore();
+    }
+
+    this.move = function(staff){
+        let posibles = [];
+        for(let option of this.movePossibilities){
+            if(checkWalls(x, y, option, staff)){
+                posibles.push(option);
+            }
+        }
+        
+    }
+
+    this.makeMov = function(moves){
+        for(let move in moves){
+            // switch(option){
+            //     case constants.RIGHT :
+            //         if(checkWalls(x + 10 , y, option , staff)){
+            //             posibles.push(constants.RIGHT);
+            //         }
+            //         break;
+            //     case constants.LEFT :
+            //         if(checkWalls(x - 10 , y , option, staff)){
+            //             posibles.push(constants.LEFT);
+            //         }
+            //         break;
+            //     case constants.DOWN:
+            //         if(checkWalls(x, y+10 , option , staff)){
+            //             posibles.push(constants.DOWN);
+            //         }
+            //         break;
+            //     case constants.UP:
+            //         if(checkWalls(x, y-10, option , staff)){
+            //             posibles.push(constants.UP);
+            //         }
+            //         break;
+            //     default:
+            //         break;
+            // }
+        }
     }
 
 }

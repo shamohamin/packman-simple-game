@@ -7,6 +7,8 @@ import { setupGame } from './setup.js';
 export var staff = new Array();
 const packman = new Packman(15,15);
 const ghost1 = new Ghost(15,15);
+staff.push(ghost1, packman);
+let Action = constants.RIGHT;
 
 window.onload = function () {
     const ctx = document.getElementById('canvas').getContext('2d')
@@ -18,40 +20,42 @@ window.onload = function () {
 
     draw();
 
-    function draw(){ 
-        for(let rect of staff){
-            if(typeof(rect) !== "undefined")
-                rect.draw(ctx);
+    // setInterval(() => draw(), 100);
+
+    function draw(){
+        ctx.clearRect(0,0,400,400);
+        for(let objects of staff){
+            if(typeof(objects) !== "undefined")
+                objects.draw(ctx);
+            if(objects instanceof Packman)
+                objects.draw(ctx, Action);
         }
     }
-
-    packman.draw(ctx, constants.RIGHT);
-    // ghost1.draw(ctx);
 
     this.document.addEventListener('keyup', (event) => {
         if(event.preventDefault) event.preventDefault();
         const {RIGHT, DOWN, UP, LEFT} = constants;
         if (event.keyCode === 38){
             this.console.log("inside up");
-            if(checkWalls(packman.x, packman.y - 10 , UP, staff)){
+            if(checkWalls(packman.x, packman.y , UP, staff)){
                 this.console.log("inside up");
                 packman.setAtr(packman.x, packman.y - 10);
-                packman.draw(ctx, UP);
+                Action = UP;
             }
         }else if(event.keyCode === 40){
-            if(checkWalls(packman.x, packman.y + 10 , DOWN, staff)){
+            if(checkWalls(packman.x, packman.y , DOWN, staff)){
                 packman.setAtr(packman.x, packman.y + 10);
-                packman.draw(ctx, DOWN);
+                Action = DOWN ;
             }
         }else if(event.keyCode === 39){
-            if(checkWalls(packman.x + 10, packman.y , RIGHT, staff)){
-                packman.setAtr(packman.x += 10, packman.y );
-                packman.draw(ctx, RIGHT);
+            if(checkWalls(packman.x , packman.y , RIGHT, staff)){
+                packman.setAtr(packman.x + 10, packman.y );
+                Action = RIGHT ;
             }
         }else if(event.keyCode === 37){
-            if(checkWalls(packman.x - 10, packman.y , LEFT, staff)){
+            if(checkWalls(packman.x, packman.y , LEFT, staff)){
                 packman.setAtr(packman.x - 10, packman.y);
-                packman.draw(ctx, LEFT);
+                Action = LEFT ;
             }
         }
         eatingNodes(packman.x, packman.y, staff) ;

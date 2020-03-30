@@ -3,25 +3,25 @@ import { WIDTH,HEIGHT,DOWN,UP,LEFT,RIGHT ,PACKMANRADUIS,RECTWIDTH}
                 from './actionsAndGameConstants.js'
 
 export const rightLogic = (x,y,item) =>
-        x + PACKMANRADUIS > item.x &&
+        x + PACKMANRADUIS + 10 > item.x &&
         ((y  > item.y && y < item.y + RECTWIDTH) ||
         (y + PACKMANRADUIS > item.y && y + PACKMANRADUIS < item.y + RECTWIDTH) ||
         (y - PACKMANRADUIS > item.y && y - PACKMANRADUIS < item.y + RECTWIDTH)) ;
 
 export const leftLogic = (x,y,item) => 
-    x - PACKMANRADUIS < item.x + RECTWIDTH && 
+    x - PACKMANRADUIS - 10 < item.x + RECTWIDTH && 
     ((y > item.y && y < item.y + RECTWIDTH) || 
     (y + PACKMANRADUIS > item.y && y + PACKMANRADUIS < item.y + RECTWIDTH) ||
     (y - PACKMANRADUIS > item.y && y - PACKMANRADUIS < item.y + RECTWIDTH)) ;
 
 export const upLogic = (x, y, item) => 
-    y - PACKMANRADUIS/2 < item.y + RECTWIDTH && 
+    y - PACKMANRADUIS - 10 < item.y + RECTWIDTH && 
     ((x > item.x && x < item.x + RECTWIDTH) || 
     (x + PACKMANRADUIS > item.x && x + PACKMANRADUIS < item.x + RECTWIDTH) ||
     (x - PACKMANRADUIS > item.x && x - PACKMANRADUIS < item.x + RECTWIDTH));
 
 export const downLogic = (x, y, item) => 
-    y + PACKMANRADUIS > item.y &&
+    y + PACKMANRADUIS + 10 > item.y &&
     ((x > item.x && x < item.x + RECTWIDTH) ||
     (x + PACKMANRADUIS > item.x && x + PACKMANRADUIS < item.x + RECTWIDTH) ||
     (x - PACKMANRADUIS > item.x && x - PACKMANRADUIS < item.x + RECTWIDTH));
@@ -45,28 +45,26 @@ export function eatingNodes(x_packman, y_packamn, staff){
 }
 
 export function checkWalls(x , y, move, staff){
-    if(widthCheck(x,y)) return false ;
     for(let item of staff){
         if(typeof item !== "undefined" && item instanceof Rect){
-            console.log(item)
             switch (move){
                 case RIGHT:
-                    if (rightLogic(x,y,item)){
+                    if (rightLogic(x,y,item) || widthCheck(x + 10 , y)){
                         return false;
                     }
                     continue;
                 case LEFT:
-                    if(leftLogic(x,y,item)){
+                    if(leftLogic(x,y,item) || widthCheck(x - 10 , y)){
                         return false;
                     }
                     continue;
                 case DOWN:
-                    if(downLogic(x,y,item)){
+                    if(downLogic(x,y,item) || widthCheck(x , y + 10)){
                         return false;
                     }
                     continue;
                 case UP:
-                    if(upLogic(x,y,item)){
+                    if(upLogic(x,y,item) || widthCheck(x , y - 5)){
                         return false;
                     }
                     continue;
