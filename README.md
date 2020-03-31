@@ -3,7 +3,7 @@ this project is simple packman game which written in javascript and html.
 
 ## start
 <ol>
- <li>At first install npm from [node-js](https://nodejs.org/en/download/) <br />
- <li>in root of project type `npm install` in terminal
+ <li>First install npm from <a href="https://www.google.com">node-js</a>
+ <li>inside your project root in terminal insert `npm install`
  <li>then `npm start`
 <ol>
