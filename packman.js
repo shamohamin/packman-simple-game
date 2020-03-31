@@ -6,8 +6,10 @@ import { setupGame } from './setup.js';
 
 export var staff = new Array();
 const packman = new Packman(15,15);
-const ghost1 = new Ghost(15,15);
-staff.push(ghost1, packman);
+const ghost1 = new Ghost(15,295);
+const ghost2 = new Ghost(295, 295);
+const ghost3 = new Ghost(15, 255);
+staff.push(ghost1, packman, ghost2, ghost3);
 let Action = constants.RIGHT;
 
 window.onload = function () {
@@ -19,9 +21,13 @@ window.onload = function () {
     setupGame(staff);
 
     draw();
-
-    // setInterval(() => draw(), 100);
-
+    const drawInterval = setInterval(() => draw(), 100);
+    const ghost1Interval = 
+        this.setInterval(() => ghost1.move(staff, packman, exit) , 300);
+    const ghost2Interval = 
+        this.setInterval(() => ghost2.move(staff, packman, exit), 400);
+    const ghost3Interval = 
+        this.setInterval(() => ghost3.move(staff, packman, exit), 500);
     function draw(){
         ctx.clearRect(0,0,400,400);
         for(let objects of staff){
@@ -32,13 +38,13 @@ window.onload = function () {
         }
     }
 
-    this.document.addEventListener('keyup', (event) => {
+    this.document.addEventListener('keyup', packmanEventHandller) ;
+
+    function packmanEventHandller(event){
         if(event.preventDefault) event.preventDefault();
         const {RIGHT, DOWN, UP, LEFT} = constants;
         if (event.keyCode === 38){
-            this.console.log("inside up");
             if(checkWalls(packman.x, packman.y , UP, staff)){
-                this.console.log("inside up");
                 packman.setAtr(packman.x, packman.y - 10);
                 Action = UP;
             }
@@ -60,7 +66,15 @@ window.onload = function () {
         }
         eatingNodes(packman.x, packman.y, staff) ;
         draw() ;
-    }) ;
+    }
+
+    function exit(){
+        clearInterval(drawInterval);
+        clearInterval(ghost1Interval);
+        document.removeEventListener('keyup' , packmanEventHandller);
+        clearInterval(ghost2Interval);
+        clearInterval(ghost3Interval);
+    }
 
 }
 

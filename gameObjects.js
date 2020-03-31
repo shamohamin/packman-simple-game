@@ -72,7 +72,7 @@ export function Ghost(x,y){
         this.x = x;
         this.y = y;
     }
-    this.drawCircle = drawCircle;
+    // this.drawCircle = drawCircle;
 
     this.draw = function(ctx){
         
@@ -107,58 +107,94 @@ export function Ghost(x,y){
         ctx.restore();
     }
 
-    this.move = function(staff , packman){
+    this.move = function(staff , packman , exit){
         let possibles = [];
         for(let option of this.movePossibilities){
-            if(checkWalls(x, y, option, staff)){
+            if(checkWalls(this.x, this.y, option, staff)){
                 possibles.push(option);
             }
         }
-        this.makeDecision(possibles, packman) ;
+        console.log(possibles);
+
+        this.makeDecision(possibles, packman , exit) ;
     }
 
-    this.makeDecision = function(moves, packman){
-        let direction = [];
+    this.makeDecision = function(moves, packman, exit){
+        let direction;
         let min = 20000000 ;
-        for(let option in moves){
+        for(let option of moves){
             let dis ;
             switch(option){
                 case constants.RIGHT :
-                    dis = this.dist(this.x + 10, this.y ,packman)
+                    dis = this.dist(this.x + 10, this.y ,packman) ;
                     if(min > dis){
                         min = dis ;
-                        direction.push(constants.RIGHT);
+                        direction = constants.RIGHT;
                     }
                     break;
                 case constants.LEFT :
                     dis = this.dist(this.x - 10, this.y ,packman)
                     if(min > dis){
                         min = dis ;
-                        direction.push(constants.LEFT);
+                        direction = (constants.LEFT);
                     }
                     break;
                 case constants.DOWN:
                     dis = this.dist(this.x, this.y + 10 ,packman)
                     if(min > dis){
                         min = dis ;
-                        direction.push(constants.DOWN);
+                        direction = constants.DOWN;
                     }
                     break;
                 case constants.UP:
                     dis = this.dist(this.x, this.y - 10 ,packman)
                     if(min > dis){
                         min = dis ;
-                        direction.push(constants.UP);
+                        direction = (constants.UP);
                     }
                     break;
                 default:
                     break;
             }
         }
+        console.log(direction);
+        this.makeMove(direction, packman,exit);
+
+    }
+
+    this.makeMove = (direction, packman,exit) => {
+        console.log(direction);
+        switch(direction){
+            case constants.RIGHT :
+                this.setAtr(this.x + 10, this.y);
+                break;
+            case constants.LEFT :
+                this.setAtr(this.x - 10, this.y);
+                break;
+            case constants.UP :
+                this.setAtr(this.x , this.y - 10);
+                break;
+            case constants.DOWN :
+                this.setAtr(this.x , this.y + 10);
+                break;
+            default:
+                break;
+        }
+        if(this.collide(packman)){
+            exit();
+        }
     }
 
     this.dist = (moved_x , moved_y , packman) => 
         (moved_x - packman.x) * (moved_x - packman.x) + 
-            (moved_y - packman.x) * (moved_y - packman.x) ;
+            (moved_y - packman.y) * (moved_y - packman.y) ;
+
+    this.collide = function(packman){
+        if(this.x > packman.x - 14 && this.x < packman.x + 14 &&
+            this.y > packman.y - 14 && this.y < packman.y + 14 ){
+                return true;
+            }
+        return false ;
+    }
 
 }
