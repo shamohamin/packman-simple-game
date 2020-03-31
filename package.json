@@ -4,7 +4,7 @@
   "description": "this project is simple packman game which written in javascript and html.",
   "main": "actionsAndGameConstants.js",
   "scripts": {
-    "start": "http-server ./",
+    "start": "http-server ./public/",
     "build": "rm -rf dist && webpack --mode development"
   },
   "repository": {
