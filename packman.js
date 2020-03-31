@@ -8,11 +8,13 @@ export var staff = new Array();
 const packman = new Packman(15,15);
 const ghost1 = new Ghost(15,295);
 const ghost2 = new Ghost(295, 295);
-const ghost3 = new Ghost(15, 255);
+const ghost3 = new Ghost(225, 200);
 staff.push(ghost1, packman, ghost2, ghost3);
 let Action = constants.RIGHT;
 
-window.onload = function () {
+window.onload = startGame();
+
+function startGame(){
     const ctx = document.getElementById('canvas').getContext('2d')
     const {HEIGHT, WIDTH} = constants;
     ctx.strokeStyle = "red"
@@ -21,13 +23,15 @@ window.onload = function () {
     setupGame(staff);
 
     draw();
+
     const drawInterval = setInterval(() => draw(), 100);
     const ghost1Interval = 
-        this.setInterval(() => ghost1.move(staff, packman, exit) , 300);
+        setInterval(() => ghost1.move(staff, packman, exit) , 300);
     const ghost2Interval = 
-        this.setInterval(() => ghost2.move(staff, packman, exit), 400);
+        setInterval(() => ghost2.move(staff, packman, exit), 400);
     const ghost3Interval = 
-        this.setInterval(() => ghost3.move(staff, packman, exit), 500);
+        setInterval(() => ghost3.move(staff, packman, exit), 500);
+    
     function draw(){
         ctx.clearRect(0,0,400,400);
         for(let objects of staff){
@@ -38,7 +42,7 @@ window.onload = function () {
         }
     }
 
-    this.document.addEventListener('keyup', packmanEventHandller) ;
+    document.addEventListener('keyup', packmanEventHandller) ;
 
     function packmanEventHandller(event){
         if(event.preventDefault) event.preventDefault();
@@ -74,7 +78,8 @@ window.onload = function () {
         document.removeEventListener('keyup' , packmanEventHandller);
         clearInterval(ghost2Interval);
         clearInterval(ghost3Interval);
+        const exitElement = document.getElementById('exit');
+        exitElement.innerHTML = "GAMEOVER";
+        exitElement.className = 'exit';
     }
-
 }
-

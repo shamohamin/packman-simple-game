@@ -1,0 +1,31 @@
+.exit {
+    font-size: 40px;
+    text-align: center;
+    content: '';
+    animation-name: exit;
+    animation-duration: 3s;
+    animation-fill-mode: forwards;
+    position: absolute;
+    color: white;
+    font-weight: 900;
+    -webkit-text-stroke: 2px;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 10px;
+    text-shadow: 5px 5px  red ;
+}
+
+@keyframes exit{
+    0%{
+        top: -100px;
+        left: 5%;
+    }
+    50%{
+        left: 5%;
+        top: 70%;
+    }
+    100%{
+        left: 5%;
+        top: 50%;
+    }
+}
+
