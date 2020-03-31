@@ -1,0 +1,24 @@
+{
+  "name": "packman-simple-game",
+  "version": "1.0.0",
+  "description": "this project is simple packman game which written in javascript and html.",
+  "main": "actionsAndGameConstants.js",
+  "scripts": {
+    "start": "http-server ./",
+    "build": "rm -rf dist && webpack --mode development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shamohamin/packman-simple-game.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shamohamin/packman-simple-game/issues"
+  },
+  "homepage": "https://github.com/shamohamin/packman-simple-game#readme",
+  "dependencies": {
+    "http-server": "^0.12.1"
+  }
+}
