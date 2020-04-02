@@ -4,7 +4,7 @@
   "description": "this project is simple packman game which written in javascript and html.",
   "main": "actionsAndGameConstants.js",
   "scripts": {
-    "start": "http-server ./public/",
+    "start": "live-server ./public/ -o --brwoser='Google Chrome'",
     "build": "rm -rf dist && webpack --mode development"
   },
   "repository": {
@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/shamohamin/packman-simple-game#readme",
   "dependencies": {
-    "http-server": "^0.12.1"
+    "http-server": "^0.12.1",
+    "live-server": "^1.2.1"
   }
 }
