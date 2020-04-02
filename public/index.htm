@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <audio id="chomp" autoplay>
+        <source src="./sounds/pacman_chomp.wav" >
+        <source src="./sounds/pacman_beginning.wav">
+    </audio>
+    <!-- <audio id="begin">
+        <source src="./sounds/pacman_beginning.wav">
+    </audio> -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Packman</title>
+    <script type="module" src="../js/packman.js"></script>
+    <link rel="stylesheet" href="../style/style.css">
+    <script>
+        function pl(){
+            console.log('hello')
+            document.getElementById('chomp').play()
+        }
+    </script>
+</head>
+<body onload="pl()" style="background-color: #101010">
+    
+    <div style="position:relative">
+        <canvas style="border: 1px solid red" id="canvas" onkeydown="" width="400" height="400"></canvas>
+        <div id="exit"></div>
+        <div ></div>
+    </div>
+</body>
