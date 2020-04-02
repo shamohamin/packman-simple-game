@@ -114,7 +114,7 @@ export function Ghost(x,y){
                 possibles.push(option);
             }
         }
-        console.log(possibles);
+        // console.log(possibles);
 
         this.makeDecision(possibles, packman , exit) ;
     }
@@ -157,13 +157,13 @@ export function Ghost(x,y){
                     break;
             }
         }
-        console.log(direction);
+        // console.log(direction);
         this.makeMove(direction, packman,exit);
 
     }
 
     this.makeMove = (direction, packman,exit) => {
-        console.log(direction);
+        // console.log(direction);
         switch(direction){
             case constants.RIGHT :
                 this.setAtr(this.x + 10, this.y);

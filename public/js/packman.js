@@ -44,10 +44,11 @@ function startGame(){
         }
     }
 
-    document.addEventListener('keyup', packmanEventHandller) ;
-
+    document.addEventListener('keydown', packmanEventHandller) ;
+    // document.addEventListener('keyup', )
     function packmanEventHandller(event){
         if(event.preventDefault) event.preventDefault();
+        console.log('keydown')
         const {RIGHT, DOWN, UP, LEFT} = constants;
         if (event.keyCode === 38){
             if(checkWalls(packman.x, packman.y , UP, staff)){
@@ -77,7 +78,7 @@ function startGame(){
     function exit(){
         clearInterval(drawInterval);
         clearInterval(ghost1Interval);
-        document.removeEventListener('keyup' , packmanEventHandller);
+        document.removeEventListener('keydown' , packmanEventHandller);
         clearInterval(ghost2Interval);
         clearInterval(ghost3Interval);
         const exitElement = document.getElementById('exit');
