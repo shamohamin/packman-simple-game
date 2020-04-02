@@ -28,11 +28,11 @@ function startGame(){
     const drawInterval = 
         setInterval(() => draw(), 100);
     const ghost1Interval = 
-        setInterval(() => ghost1.move(staff, packman, exit) , 300);
+        setInterval(() => ghost1.move(staff, packman, exit) , 150);
     const ghost2Interval = 
-        setInterval(() => ghost2.move(staff, packman, exit), 400);
+        setInterval(() => ghost2.move(staff, packman, exit), 200);
     const ghost3Interval = 
-        setInterval(() => ghost3.move(staff, packman, exit), 500);
+        setInterval(() => ghost3.move(staff, packman, exit), 300);
     
     function draw(){
         ctx.clearRect(0,0,400,400);
