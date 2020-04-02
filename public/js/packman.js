@@ -45,10 +45,10 @@ function startGame(){
     }
 
     document.addEventListener('keydown', packmanEventHandller) ;
-    // document.addEventListener('keyup', )
+    
     function packmanEventHandller(event){
         if(event.preventDefault) event.preventDefault();
-        console.log('keydown')
+        
         const {RIGHT, DOWN, UP, LEFT} = constants;
         if (event.keyCode === 38){
             if(checkWalls(packman.x, packman.y , UP, staff)){
