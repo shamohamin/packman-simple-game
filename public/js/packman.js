@@ -12,7 +12,16 @@ const ghost3 = new Ghost(225, 200);
 staff.push(ghost1, packman, ghost2, ghost3);
 let Action = constants.RIGHT;
 
-window.onload = startGame();
+window.onload = function(){
+    // const startSound = document.getElementById('chomp') ;
+    // startSound.setAttribute("preload", "auto");
+    // this.setTimeout(() => 
+    // startSoun(startSound)
+    // .then(() => startGame())
+    // .catch(e => this.console.log(e))
+    // , 1000);
+    startGame();
+}
 
 function startGame(){
 
@@ -22,7 +31,7 @@ function startGame(){
     new Rect(0 ,0 , WIDTH, HEIGHT).draw(ctx)
     
     setupGame(staff);
-
+    
     draw();
 
     const drawInterval = 
@@ -48,7 +57,8 @@ function startGame(){
     
     function packmanEventHandller(event){
         if(event.preventDefault) event.preventDefault();
-        
+    //     startSound.play()
+    // .catch(e => console.log(e))
         const {RIGHT, DOWN, UP, LEFT} = constants;
         if (event.keyCode === 38){
             if(checkWalls(packman.x, packman.y , UP, staff)){

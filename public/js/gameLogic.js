@@ -32,14 +32,16 @@ export const widthCheck = (x, y) =>
     y + PACKMANRADUIS > HEIGHT || 
     y - PACKMANRADUIS < 0 ;
 
-export function eatingNodes(x_packman, y_packamn, staff){
+export function eatingNodes(x_packman, y_packamn, staff, chomp){
     for(let i = 0; i < staff.length ; i++){
         const rect = staff[i];
         if(rect instanceof Circle){
             if((rect.x < x_packman + 14) && (rect.x > x_packman - 14)
                 && (rect.y < y_packamn + 14) && (rect.y > y_packamn - 14)){
+                // chomp.play();
                 delete staff[i];
             }
+            // chomp.pause();
         }
     }
 }
