@@ -7,13 +7,13 @@ window.onload = function () {
     const ctx = this.document.getElementById('canvas').getContext('2d');
     drawHome(ctx);
     ctx.fillStyle="yellow";
-    
+    write_packman();
     let staff = [];
-    for(let i = 170 ; i <= 260 ; i += 10)
+    for(let i = 150 ; i <= 260 ; i += 10)
         staff.push(new Circle(i, 150))
     
     let packman_move = RIGHT;
-    const packman = new Packman(150,150);
+    const packman = new Packman(140,150);
     staff.push(packman);
     
     let direction_right = 10; 
@@ -24,7 +24,7 @@ window.onload = function () {
             direction_right = -10 ;
             packman_move = LEFT;
             staff_cop = Object.assign([] , staff);
-        }else if(packman.x < 150){
+        }else if(packman.x < 142){
             direction_right = 10 ;
             packman_move = RIGHT;
             staff_cop = Object.assign([] , staff);
@@ -32,7 +32,7 @@ window.onload = function () {
 
         packman.setAtr(packman.x + direction_right, packman.y);
         animated(ctx,staff_cop,packman,packman_move);
-    }, 500);
+    }, 300);
 
     const audio = new this.Audio('../sounds/pacman_beginning.wav');
 
@@ -69,11 +69,23 @@ const animated = (ctx, staff, packman, packman_move) => {
 
 const draw_objects = (ctx,staff, packman_move) => {
 
-    ctx.clearRect(130, 130, 150 , 150);
+    ctx.clearRect(120, 120, 150 , 150);
     for(let item of staff){
         if(item != undefined)
             item.draw(ctx)
         if(item instanceof Packman)
             item.draw(ctx, packman_move)
     }
+}
+
+const write_packman = () => {
+    const packman = document.getElementById('packman');
+    const PACKMANWORD = "packman" ;
+    
+    for(let i = 0 ; i < PACKMANWORD.length + 1 ; i++){
+        setTimeout(() => {
+            packman.innerHTML = PACKMANWORD.substr(0, i);
+        }, i*500);
+    }
+
 }
