@@ -71,4 +71,17 @@
     left: 23%;
     padding: 10px;
     width: 100px;
+    transition: all;
+}
+
+.leaderboard-button:hover {
+    opacity: 0.5;
+    border: none;
+    color: red;
+    font-size: 2em;
+    font-weight: bold;
+    font-style: italic;
+    z-index: 3;
+    cursor: pointer;
+    left: 10%;
 }
