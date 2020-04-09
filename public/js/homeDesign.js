@@ -16,21 +16,16 @@ const drawHome = (ctx) => {
 
     ctx.moveTo(200, 20);
     ctx.lineTo(20, 150);
+    ctx.lineTo(20, 380);
+    ctx.lineTo(180, 380);
+    ctx.lineTo(180, 330);
+    ctx.lineTo(220, 330);
+    ctx.lineTo(220, 380);
+    ctx.lineTo(380, 380);
+    ctx.lineTo(380, 150);
+    ctx.lineTo(200,20);
+    
     ctx.stroke();
-    setTimeout(() => {
-        ctx.moveTo(20, 150);
-        ctx.lineTo(20, 380);
-        ctx.stroke();
-    }, 1000);
-    setTimeout(() => {
-        ctx.lineTo(380, 380);
-        ctx.stroke();
-    }, 2000)
-    
-    // ctx.lineTo(380, 150);
-    // ctx.lineTo(200,20);
-    
-    // ctx.stroke();
 
     ctx.closePath();
 }
