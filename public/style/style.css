@@ -29,7 +29,6 @@
     }
 }
 
-
 .container {
     display: flex;
     flex-flow: row wrap ;
@@ -49,7 +48,7 @@
     text-align: center;
     max-height: 400px;
     padding: 10px;
-    position: relative;
+    /* position: relative; */
 }
 
 .start-button {
@@ -57,9 +56,29 @@
     color:white ;
     position:absolute;
     top:50%;
-    left: 50%;
+    left: 60%;
     padding: 10px;
     width: 100px;
+    border-top-right-radius: 20px;
+    border-left: none;
+    transition: all;
+}
+
+
+.start-button:hover {
+    opacity: 0.5;
+    border: none;
+    color: green;
+    font-size: 1.5em;
+    font-weight: bold;
+    font-style: italic;
+    z-index: 3;
+    cursor: pointer;
+    animation-name: on-right;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
 }
 
 .leaderboard-button {
@@ -68,20 +87,67 @@
     border-right: none;
     color: white;
     top: 50%;
-    left: 23%;
+    left: 10%;
     padding: 10px;
     width: 100px;
     transition: all;
+    border-top-left-radius: 20px;
 }
 
 .leaderboard-button:hover {
     opacity: 0.5;
     border: none;
     color: red;
-    font-size: 2em;
+    font-size: 1.5em;
     font-weight: bold;
     font-style: italic;
     z-index: 3;
     cursor: pointer;
-    left: 10%;
+    animation-name: on-left;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+}
+
+@keyframes on-left {
+    0%{
+        opacity: 0.5;
+        font-size: 1.2em;
+        left: 8%;
+        top: 48%;
+    }
+    50%{
+        opacity: 0.7;
+        font-size: 1.5em;
+        left: 8%;
+        top: 48%;
+    }
+    100%{
+        opacity: 1;
+        font-size: 1em;
+        left: 8%;
+        top: 48%;
+    }
+}
+
+@keyframes on-right {
+    0%{
+        opacity: 0.5;
+        font-size: 1.2em;
+        left: 60%;
+        top: 48%;
+    }
+    50%{
+        opacity: 0.7;
+        font-size: 1.5em;
+        left: 60%;
+        top: 48%;
+    }
+    100%{
+        opacity: 1;
+        font-size: 1em;
+        left: 60%;
+        top: 48%;
+    }
 }
