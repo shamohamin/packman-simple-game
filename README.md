@@ -15,6 +15,4 @@ this project is simple packman game which written in javascript and html.
  <li> open <a href="http://127.0.0.1:8080/">http://127.0.0.1:8080/</a>
  <ol>
 
-
-
-
+## screen shots
